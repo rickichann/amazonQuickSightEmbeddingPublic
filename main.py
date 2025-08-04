@@ -15,8 +15,17 @@ app.add_middleware(
 
 
 ## VAR
-REGION = 
-AWS_ACCOUNT_ID = 
+REGION_NAME = ""
+AWS_ACCOUNT_ID = ""
+
+
+## Dashboard
+
+INITIAL_DASHBOARD_ID = "" 
+
+## Q&A Generative
+INITIAL_TOPIC_ID = ""
+
 
 
 @app.get("/embed-dashboard-url")
@@ -25,12 +34,12 @@ async def get_embed_dashboard_url():
     Generates an embed URL for a specific QuickSight Dashboard.
     """
     try:
-        client = boto3.client("quicksight", region_name="ap-southeast-1")
+        client = boto3.client("quicksight", region_name=REGION_NAME)
         response = client.generate_embed_url_for_registered_user(
             AwsAccountId=AWS_ACCOUNT_ID,
             UserArn="arn:aws:quicksight:<region>:<aws-account>:user/default/<username>",
             ExperienceConfiguration={
-                'Dashboard': {'InitialDashboardId': ''}
+                'Dashboard': {'InitialDashboardId': INITIAL_DASHBOARD_ID}
             },
             AllowedDomains=["http://localhost:8080"],
             SessionLifetimeInMinutes=60
@@ -49,12 +58,12 @@ async def get_embed_generative_qna_url():
     Generates an embed URL for the QuickSight Generative Q&A experience.
     """
     try:
-        client = boto3.client("quicksight", region_name="ap-southeast-1")
+        client = boto3.client("quicksight", region_name=REGION_NAME)
         response = client.generate_embed_url_for_registered_user(
             AwsAccountId=AWS_ACCOUNT_ID,
             UserArn="arn:aws:quicksight:<region>:<aws-account>:user/default/<username>",
             ExperienceConfiguration={
-                'GenerativeQnA': {'InitialTopicId': ''}
+                'GenerativeQnA': {'InitialTopicId': INITIAL_TOPIC_ID }
             },
             AllowedDomains=["http://localhost:8080"],
             SessionLifetimeInMinutes=60
