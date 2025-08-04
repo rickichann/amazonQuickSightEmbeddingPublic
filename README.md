@@ -44,7 +44,15 @@ python -m http.server 8080
 Open your browser and go to:
 ```bash
 http://localhost:8080/index.html
-```#
+```
+Ex:
+<img width="1910" height="908" alt="QSq" src="https://github.com/user-attachments/assets/fc989e7e-6612-47e1-9c76-2b994bf51e9e" />
 
 
-ss 
+
+
+Sources:
+- https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/quicksight/client/generate_embed_url_for_registered_user.html
+
+
+
