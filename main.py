@@ -22,9 +22,9 @@ async def get_embed_dashboard_url():
         client = boto3.client("quicksight", region_name="ap-southeast-1")
         response = client.generate_embed_url_for_registered_user(
             AwsAccountId="484468819120",
-            UserArn="arn:aws:quicksight:ap-southeast-1:484468819120:user/default/ics-de",
+            UserArn="arn:aws:quicksight:<region>:<aws-account>:user/default/<username>",
             ExperienceConfiguration={
-                'Dashboard': {'InitialDashboardId': '310e4ae4-b240-4f85-b2a5-5625af3cea0f'}
+                'Dashboard': {'InitialDashboardId': ''}
             },
             AllowedDomains=["http://localhost:8080"],
             SessionLifetimeInMinutes=60
@@ -46,9 +46,9 @@ async def get_embed_generative_qna_url():
         client = boto3.client("quicksight", region_name="ap-southeast-1")
         response = client.generate_embed_url_for_registered_user(
             AwsAccountId="484468819120",
-            UserArn="arn:aws:quicksight:ap-southeast-1:484468819120:user/default/ics-de",
+            UserArn="arn:aws:quicksight:<region>:<aws-account>:user/default/<username>",
             ExperienceConfiguration={
-                'GenerativeQnA': {'InitialTopicId': 'blGXZnP3aGJtAyqvlNwALuWPEZj3bfkn'}
+                'GenerativeQnA': {'InitialTopicId': ''}
             },
             AllowedDomains=["http://localhost:8080"],
             SessionLifetimeInMinutes=60
