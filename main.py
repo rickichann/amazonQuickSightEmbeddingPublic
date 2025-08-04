@@ -13,6 +13,12 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+
+## VAR
+REGION = 
+AWS_ACCOUNT_ID = 
+
+
 @app.get("/embed-dashboard-url")
 async def get_embed_dashboard_url():
     """
@@ -21,7 +27,7 @@ async def get_embed_dashboard_url():
     try:
         client = boto3.client("quicksight", region_name="ap-southeast-1")
         response = client.generate_embed_url_for_registered_user(
-            AwsAccountId="484468819120",
+            AwsAccountId=AWS_ACCOUNT_ID,
             UserArn="arn:aws:quicksight:<region>:<aws-account>:user/default/<username>",
             ExperienceConfiguration={
                 'Dashboard': {'InitialDashboardId': ''}
@@ -45,7 +51,7 @@ async def get_embed_generative_qna_url():
     try:
         client = boto3.client("quicksight", region_name="ap-southeast-1")
         response = client.generate_embed_url_for_registered_user(
-            AwsAccountId="484468819120",
+            AwsAccountId=AWS_ACCOUNT_ID,
             UserArn="arn:aws:quicksight:<region>:<aws-account>:user/default/<username>",
             ExperienceConfiguration={
                 'GenerativeQnA': {'InitialTopicId': ''}
