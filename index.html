@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>QuickSight Dashboard & Generative Q&A</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      text-align: center;
+      background-color: #f5f5f5;
+    }
+    h1 {
+      margin-top: 40px;
+    }
+    .embed-container {
+      margin-top: 20px;
+      display: flex;
+      justify-content: center;
+    }
+    iframe {
+      width: 1000px;
+      height: 600px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      background-color: white;
+    }
+  </style>
+</head>
+<body>
+  <h1>QuickSight Dashboard</h1>
+  <div class="embed-container" id="dashboardContainer">Loading dashboard...</div>
+
+  <h1>QuickSight Generative Q&A</h1>
+  <div class="embed-container" id="qnaContainer">Loading Q&A...</div>
+
+  <script>
+    async function loadEmbed(url, containerId) {
+      try {
+        const response = await fetch(url);
+        if (!response.ok) throw new Error(`Failed to fetch from ${url}`);
+        const data = await response.json();
+        document.getElementById(containerId).innerHTML = `
+          <iframe src="${data.embed_url}" allowfullscreen></iframe>
+        `;
+      } catch (error) {
+        console.error("Error:", error);
+        document.getElementById(containerId).innerText = "Failed to load embed URL.";
+      }
+    }
+
+    window.addEventListener("DOMContentLoaded", () => {
+      loadEmbed("http://localhost:8000/embed-dashboard-url", "dashboardContainer");
+      loadEmbed("http://localhost:8000/embed-generative-qna-url", "qnaContainer");
+    });
+  </script>
+</body>
+</html>
